@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+	</head>
+	<body>
+		<div>
+			<ul>
+				{% for menu in menus %}
+					<a>{{menu.title}}</a>
+					<ul>
+					{% for submenu in menu.submenus %}
+						<li class="{%if submenu.current_item%}active{% endif%}">
+							<a href="{% url submenu.url %}">
+								{{submenu.title}}
+							</a>
+						</li>
+					{% endfor %}
+					</ul>
+				{% empty %}
+					No Menus
+				{% endfor %}
+		
+			</ul>
+		</div>
+		{% block content %}
+
+
+		{% endblock %}
+	</body>
+</html>
